@@ -1,6 +1,8 @@
 # PhoneBook
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.8.
+This project was generated with:
+[Angular CLI](https://github.com/angular/angular-cli) version 9.1.8.
+Node 12.16.2
 
 ## Development server
 
