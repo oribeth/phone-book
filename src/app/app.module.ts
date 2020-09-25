@@ -5,6 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BuscadorComponent } from './buscador/buscador.component';
 import { DetallePersonaComponent } from './detalle-persona/detalle-persona.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { RegionComunaService } from 'src/services/region-comuna.service';
+import { InformacionPersonasService } from 'src/services/informacion-personas.service';
 
 @NgModule({
   declarations: [
@@ -14,9 +17,13 @@ import { DetallePersonaComponent } from './detalle-persona/detalle-persona.compo
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    InformacionPersonasService,
+    RegionComunaService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

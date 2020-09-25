@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  /** Obtener regiones y comunas */
+  REGION_COMUNA: 'https://private-anon-9f8807c091-testphonebook.apiary-mock.com/region',
+  /** */
+  INFORMACION_PERSONAS: 'https://private-anon-9f8807c091-testphonebook.apiary-mock.com/persona'
 };
 
 /*
