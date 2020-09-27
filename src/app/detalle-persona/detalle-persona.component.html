@@ -1,1 +1,27 @@
-<p>detalle-persona works!</p>
+<ion-grid *ngIf="mostrar">
+    <ion-row class="ion-margin-horizontal">
+        <ion-col size="12" class="ion-text-center ion-margin">
+            <ion-title>Información Detallada</ion-title>
+        </ion-col>
+        <ion-col size="12" size-md="3" class="ion-left-center">
+            <ion-label position="floating">RUT</ion-label>
+            <ion-input value="{{informacion.rut}}" readonly name="rut"></ion-input>
+            <span *ngIf="!rutValido" class="tooltiptext">RUT no válido</span>
+        </ion-col>
+        <ion-col size="12" size-md="3" class="ion-left-center">
+            <ion-label position="floating">Nombre y Apellido</ion-label>
+            <ion-input value="{{informacion.nombre}} {{informacion.apellido}}" readonly></ion-input>
+        </ion-col>
+        <ion-col size="12" size-md="2" class="ion-left-center">
+            <ion-label position="floating">Teléfono</ion-label>
+            <ion-input value="{{informacion.telefono}}" readonly name="telefono"></ion-input>
+            <span *ngIf="!telefonoValido" class="tooltiptext">Teléfono no válido</span>
+        </ion-col>
+        <ion-col size="12" size-md="4" class="ion-left-center">
+            <ion-label position="floating">Dirección</ion-label>
+            <ion-textarea readonly
+                value="{{informacion.direccion.calle}} {{informacion.direccion.numero}}. Comuna {{informacion.direccion.comuna.nombre}}">
+            </ion-textarea>
+        </ion-col>
+    </ion-row>
+</ion-grid>

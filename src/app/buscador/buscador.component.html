@@ -1,3 +1,97 @@
-<p *ngFor="let reg of region">{{reg.nombre}}</p>
-
-
+<ion-app class="ion-padding">
+    <ion-content *ngIf="view === 'data'">
+        <ion-grid>
+            <form [formGroup]="formulario" (ngSubmit)="buscar()">
+                <ion-row>
+                    <ion-col size="12" class="ion-text-center">
+                        <ion-title>Phonebook</ion-title>
+                    </ion-col>
+                    <ion-col size="12" size-md="3" class="ion-text-center">
+                        <ion-item>
+                            <ion-label position="floating">Nombre</ion-label>
+                            <ion-input placeholder="Ingrese nombre" formControlName="nombreForm"></ion-input>
+                        </ion-item>
+                    </ion-col>
+                    <ion-col size="12" size-md="3" class="ion-text-center">
+                        <ion-item>
+                            <ion-label position="floating">Apellido</ion-label>
+                            <ion-input placeholder="Ingrese apellido" formControlName="apellidoForm">
+                            </ion-input>
+                        </ion-item>
+                    </ion-col>
+                    <ion-col size="12" size-md="2.5" class="ion-text-center">
+                        <ion-item>
+                            <ion-label position="floating">Región</ion-label>
+                            <ion-select placeholder="Seleccione Región" interface="popover"
+                                (ionChange)="obtenerComunas($event)" formControlName="regionForm">
+                                <ion-select-option *ngFor="let reg of region" value="{{reg.id}}">{{reg.nombre}}
+                                </ion-select-option>
+                            </ion-select>
+                        </ion-item>
+                    </ion-col>
+                    <ion-col size="12" size-md="2.5" class="ion-text-center">
+                        <ion-item>
+                            <ion-label position="floating">Comuna</ion-label>
+                            <ion-select placeholder="Seleccione Comuna" interface="popover"
+                                formControlName="comunaForm">
+                                <ion-select-option *ngFor="let com of comunas" value="{{com.id}}">{{com.nombre}}
+                                </ion-select-option>
+                            </ion-select>
+                        </ion-item>
+                    </ion-col>
+                    <ion-col size="12" size-md="1" class="ion-text-center ion-align-self-center">
+                        <ion-button type="submit">
+                            <img src="assets/buscador/search.svg" width="30px" height="30px" />
+                        </ion-button>
+                        <ion-button type="button" color="danger" (click)="clear()">
+                            <img src="assets/buscador/trash.svg" width="30px" height="30px" />
+                        </ion-button>
+                    </ion-col>
+                </ion-row>
+            </form>
+            <ion-row>
+                <ion-col *ngIf="mensaje !== '' && resultado" size="12" class="ion-text-center">
+                    <p>{{mensaje}}</p>
+                </ion-col>
+                <ion-col *ngIf="!resultado && mensaje === ''" size="12" class="ion-text-center">
+                    <p>{{menBusqueda}}</p>
+                </ion-col>
+                <ion-col *ngIf="listado.length !== 0" size="12" class="ion-text-center">
+                    <ion-header>
+                        <ion-toolbar>
+                            <ion-title>Resultados</ion-title>
+                        </ion-toolbar>
+                    </ion-header>
+                    <ion-item *ngFor="let res of listado" button (click)="detalle(res)">
+                        <ion-label>
+                            {{res.nombre}} {{res.apellido}}
+                        </ion-label>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-content>
+    <ion-content *ngIf="view === 'data'">
+        <app-detalle-persona [informacion]="seleccionPer" [mostrar]="mostrar"></app-detalle-persona>
+    </ion-content>
+    <ion-content *ngIf="view === 'error'">
+        <ion-grid>
+            <ion-row>
+                <ion-col size="12" class="ion-text-center">
+                    <img src="assets/buscador/bug-outline.svg" width="200px" height="200px" />
+                </ion-col>
+                <ion-col size="12" class="ion-text-center">
+                    <ion-title class="ion-margin">¡Lo Sentimos!</ion-title>
+                    <p class="ion-margin">
+                        Ha ocurrido un error.<br>Inténtalo de nuevo.
+                    </p>
+                </ion-col>
+                <ion-col size="12" class="ion-text-center">
+                    <ion-button type="button" color="secondary" (click)="reintentar()">
+                        Reintentar
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-content>
+</ion-app>

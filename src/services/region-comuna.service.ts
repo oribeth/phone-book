@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { RegionComunaResponse } from 'src/model/region-comuna-response';
+import { RegionResponse } from 'src/model/region-comuna-response';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ export class RegionComunaService {
 
   constructor(public http: HttpClient) { }
 
-  cosultarRegionComuna(): Observable<boolean | RegionComunaResponse[]> {
+  cosultarRegionComuna(): Observable<boolean | RegionResponse[]> {
     return new Observable(observer => {
       const url = environment.REGION_COMUNA;
       this.http.get(url).subscribe((response: any) => {

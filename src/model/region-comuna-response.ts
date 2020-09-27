@@ -3,7 +3,7 @@ export interface Comuna {
     nombre: string;
 }
 
-export interface RegionComunaResponse {
+export interface RegionResponse {
     id: number;
     nombre: string;
     comunas: Comuna[];
