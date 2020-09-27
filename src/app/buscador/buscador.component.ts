@@ -89,7 +89,11 @@ export class BuscadorComponent implements OnInit {
   }
 
   eliminarDiacriticos(texto: string) {
-    return texto.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    try {
+      return texto.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    } catch {
+      return texto;
+    }
   }
 
   async consultarServicios() {
@@ -103,7 +107,9 @@ export class BuscadorComponent implements OnInit {
   }
 
   obtenerComunas(event: any) {
-    this.comunas = (this.region as RegionResponse[]).find(reg => reg.id === parseInt(event.detail.value, 10)).comunas;
+    if (parseInt(event.detail.value, 10) > 0) {
+      this.comunas = (this.region as RegionResponse[]).find(reg => reg.id === parseInt(event.detail.value, 10)).comunas;
+    }
   }
 
   detalle(detalle: InformacionPersonaResponse) {
@@ -117,7 +123,14 @@ export class BuscadorComponent implements OnInit {
 
   clear() {
     this.formulario.reset();
+    this.formulario = new FormGroup({
+      nombreForm: new FormControl(''),
+      apellidoForm: new FormControl(''),
+      regionForm: new FormControl('0'),
+      comunaForm: new FormControl('0')
+    });
     this.listado = [];
+    this.comunas = [];
     this.mostrar = false;
   }
 
